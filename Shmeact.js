@@ -1,5 +1,5 @@
 let globalId = 0;
-let globalParent
+let globalParent;
 const componentState = new Map();
 
 export function render(component, props, parent) {
@@ -13,6 +13,24 @@ export function render(component, props, parent) {
 }
 
 export function useState(initialState) {
-    const { cache } = componentState.get(globalParent);
-    return [initialState, setState];
+    const id = globalId;
+    const { cache, props, component } = componentState.get(globalParent);
+    if (cache[id] === null){
+        cache[id] = {
+            value: typeof initialState === 'function' ? initialState() : initialState, 
+        }
+    }
+
+    const setState = state => {
+        if (typeof state === 'function') {
+            cache[id].value = state(cache[id].value)
+        } else {
+            cache[id].value = state;
+        }
+
+        render(component, props, globalParent);
+    }
+
+    globalId++;
+    return [cache[id].value, setState];
 }
