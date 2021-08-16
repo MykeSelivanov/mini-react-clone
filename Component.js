@@ -1,4 +1,7 @@
+import { useState } from './Shmeact.js';
+
 export default function Component({ propCount }) {
+    const [count, setCount] = useState(0);
     const count = 0;
     const propCountDoubled = 0;
 
