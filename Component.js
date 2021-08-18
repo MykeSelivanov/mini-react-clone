@@ -1,4 +1,4 @@
-import { useState, useEffect } from './Shmeact.js';
+import { useState, useEffect } from './ReactClone.js';
 
 export default function Component({ propCount, buttonElement }) {
     const [count, setCount] = useState(10);

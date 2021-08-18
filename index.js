@@ -1,4 +1,4 @@
-import { render } from './Shmeact.js';
+import { render } from './ReactClone.js';
 import Component from './Component.js';
 
 let propCount = 0;
