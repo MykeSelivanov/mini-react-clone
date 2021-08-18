@@ -29,6 +29,8 @@ export function useState(initialState) {
     })()
 }
 
+export function useEffect() {}
+
 
 export function render(component, props, parent) {
     const state = componentState.get(parent) || { cache: [] };

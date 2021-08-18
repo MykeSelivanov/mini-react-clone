@@ -1,12 +1,15 @@
-import { useState } from './Shmeact.js';
+import { useState, useEffect } from './Shmeact.js';
 
-export default function Component({ propCount }) {
+export default function Component({ propCount, buttonElement }) {
     const [count, setCount] = useState(10);
     const propCountDoubled = 0;
 
-    setTimeout(() => {
-        setCount(currentCount => currentCount++);
-    }, 1000);
+    useEffect(() => {
+        const handler = () => setCount(currentCount => currentCount + 1);
+        buttonElement.addEventListener('click', handler);
+
+        return () => buttonElement.removeEventListener('click', handler);
+    }, [buttonElement]);
 
     return `
         State: ${count}
