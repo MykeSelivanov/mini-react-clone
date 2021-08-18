@@ -4,24 +4,29 @@ const componentState = new Map()
 
 export function useState(initialState) {
     const id = globalId;
-    const { cache, props, component } = componentState.get(globalParent);
+    const parent = globalParent;
+    globalId++;
 
-    if (cache[id] == null) {
-        cache[id] = { value: typeof initialState === 'function' ? initialState() : initialState, }
-    }
+    return (() => {
+        const { cache } = componentState.get(parent);
 
-    const setState = state => {
-        if (typeof state === 'function') {
-            cache[id].value = state(cache[id.value])
-        } else {
-            cache[id].value = state
+        if (cache[id] == null) {
+            cache[id] = { value: typeof initialState === 'function' ? initialState() : initialState, }
         }
 
-        render(component, props, globalParent);
-    }
+        const setState = state => {
+            const { props, component } = componentState.get(parent);
+            if (typeof state === 'function') {
+                cache[id].value = state(cache[id.value])
+            } else {
+                cache[id].value = state
+            }
 
-    globalId++;
-    return [cache[id].value, setState];
+            render(component, props, parent);
+        }
+
+        return [cache[id].value, setState];
+    })()
 }
 
 

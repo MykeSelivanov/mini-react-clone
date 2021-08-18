@@ -1,11 +1,11 @@
 import { useState } from './Shmeact.js';
 
 export default function Component({ propCount }) {
-    const [count, setCount] = useState(0);
+    const [count, setCount] = useState(10);
     const propCountDoubled = 0;
 
     setTimeout(() => {
-        setCount(currentCount => currentCount + 1);
+        setCount(currentCount => currentCount++);
     }, 1000);
 
     return `
