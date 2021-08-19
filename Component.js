@@ -1,11 +1,13 @@
-import { useState, useEffect } from './ReactClone.js';
+import { useState, useEffect, useMemo } from './ReactClone.js';
 
 export default function Component({ propCount, buttonElement }) {
     const [count, setCount] = useState(10);
-    const propCountDoubled = 0;
+    const propCountDoubled = useMemo(() => {
+        return propCount * 2
+    }, [propCount]);
 
     useEffect(() => {
-        const handler = () => setCount(currentCount => { console.log(typeof currentCount); return currentCount + 1});
+        const handler = () => setCount(currentCount => currentCount + 1);
         buttonElement.addEventListener('click', handler);
 
         return () => buttonElement.removeEventListener('click', handler);
