@@ -5,7 +5,7 @@ export default function Component({ propCount, buttonElement }) {
     const propCountDoubled = 0;
 
     useEffect(() => {
-        const handler = () => setCount(currentCount => currentCount + 1);
+        const handler = () => setCount(currentCount => { console.log(typeof currentCount); return currentCount + 1});
         buttonElement.addEventListener('click', handler);
 
         return () => buttonElement.removeEventListener('click', handler);

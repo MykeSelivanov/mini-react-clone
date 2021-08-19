@@ -11,12 +11,12 @@ export function useState(initialState) {
         const { cache } = componentState.get(parent);
 
         if (cache[id] == null) {
-            cache[id] = { value: typeof initialState === 'function' ? initialState() : initialState, }
+            cache[id] = { value: typeof initialState === "function" ? initialState() : initialState }
         }
 
-        const setState = state => {
+        const setState = (state) => {
             const { props, component } = componentState.get(parent);
-            if (typeof state === 'function') {
+            if (typeof state === "function") {
                 cache[id].value = state(cache[id.value])
             } else {
                 cache[id].value = state
@@ -48,11 +48,10 @@ export function useEffect(callback, dependencies) {
         if(dependenciesChanged) {
             if(cache[id].cleanup != null) cache[id].cleanup()
             cache[id].cleanup = callback();
+            cache[id].dependencies = dependencies
         }
-        return [cache[id].value, setState]
     })()
 }
-
 
 export function render(component, props, parent) {
     const state = componentState.get(parent) || { cache: [] };
