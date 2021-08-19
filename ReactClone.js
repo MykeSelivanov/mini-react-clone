@@ -29,7 +29,12 @@ export function useState(initialState) {
     })()
 }
 
-export function useEffect() {}
+export function useEffect() {
+    const id = globalId;
+    const parent = globalParent;
+    globalId++;
+    
+}
 
 
 export function render(component, props, parent) {
