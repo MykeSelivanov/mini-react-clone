@@ -83,10 +83,6 @@ export function useMemo(callback, dependencies) {
 
 
 export function render(component, props, parent) {
-    console.log("component", component);
-    console.log("props", props);
-    console.log("parent", parent);
-    
     const state = componentState.get(parent) || { cache: [] };
     componentState.set(parent, { ...state, component, props });
     globalParent = parent;
