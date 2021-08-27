@@ -19,7 +19,7 @@ export function useState(initialState) {
             // TODO debug setting state to troubleshoot NaN issue in component
             const { props, component } = componentState.get(parent);
             if (typeof state === "function") {
-                cache[id].value = state(cache[id.value])
+                cache[id].value = state(cache[id].value)
             } else {
                 cache[id].value = state
             }
