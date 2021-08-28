@@ -3,7 +3,6 @@ let globalParent
 const componentState = new Map()
 
 export function useState(initialState) {
-    // TODO double check whole use state to identify cause of NaN issue
     const id = globalId;
     const parent = globalParent;
     globalId++;
@@ -16,7 +15,6 @@ export function useState(initialState) {
         }
 
         const setState = (state) => {
-            // TODO debug setting state to troubleshoot NaN issue in component
             const { props, component } = componentState.get(parent);
             if (typeof state === "function") {
                 cache[id].value = state(cache[id].value)
