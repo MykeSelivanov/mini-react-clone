@@ -7,7 +7,6 @@ export default function Component({ propCount, buttonElement }) {
     }, [propCount]);
 
     useEffect(() => {
-        //TODO resolve issure with currentCount is getting undefined, which gives NaN on multiplication
         const handler = () => setCount(currentCount => currentCount + 1);
         buttonElement.addEventListener('click', handler);
 
