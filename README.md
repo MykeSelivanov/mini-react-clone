@@ -6,3 +6,7 @@
 
 ## technologies
 - vanilla JS
+
+## to run
+- clone the repo
+- open index.html with live server in your browser
